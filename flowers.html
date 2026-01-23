@@ -4,16 +4,62 @@
 <title>Home</title>
   <link rel="stylesheet" href="css.css">
 </head>
-<body>
 
-  <div class="topnav">
-    <a class="active" href="home.html">Home</a>
-    <a href="survey.html">Survey</a>
-    <a href="flowers.html">Flowers</a>
-    <a href="js.js" class="icon" oneclick="myFunction()">
-      <i class="fa fa-bars"></i>
-    </a>
-  </div>
+<style>
+.flowerLayout {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: dodgerblue;
+  padding: 10px;
+}
+.flowerLayout div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+
+</style>
+<body>
+  <main>
+    <h1 class="headliner">Zeezee</h1>
+    <topnav>
+      <div class="topnav">
+        <a class="active" href="home.html">Home</a>
+        <a href="flowers.html">Flowers</a>
+        <a href="hobbies.html">Hobbies</a>
+        <a href="christmas.html">Christmas</a>
+        <a href="films.html">Films</a>
+        <a href="pictures.html">Pictures</a>
+        <a href="help.html" class="split">Help</a>
+        <a href="js.js" class="icon" oneclick="Function()">
+          <i class="fa fa-bars"></i>
+        </a>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search"   placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2     my-sm-0" type="submit">Submit</button>
+        </form>
+      </div>
+    </topnav>
+
+
+<div class="flowerLayout">
+  <div><img class="tulip" src="tulips.webp" alt="imageOfTulips" width="600" height="800"></div>
+  <div><div><img class="baby'sBreath" src="baby'sBreath.webp" alt="imageOfBaby'sBreath" width="600" height="800"></div></div>
+  <div><div><img class="cammile" src="cammile.webp" alt="cammileImage" width="600" height="800"></div></div>
+  <div><div><img class="cosmos" src="cosmos.webp" alt="cosmos" width="600" height="800"></div></div>
+  <div><div><img class="creamRose" src="creamRose.webp" alt="creamRoseImage" width="600" height="800"></div></div>
+  <div><div><img class="daisy" src="daisy.webp" alt="imageOfDaisyFlower" width="600" height="800"></div></div>
+  <div><div><img class="hyacinths" src="hyacinths.webp" alt="hyacinths" width="600" height="800"></div></div>
+  <div><div><img class="lavender" src="lavender.webp" alt="lavender" width="600" height="800"></div></div>
+  <div><div><img class="poppy" src="poppy.webp" alt="poppy" width="600" height="800"></div></div>
+  <div><div><img class="sunflower" src="sunflower.webp" alt="sunflower width="600" height="800"></div></div>
+  <div><div><img class="whiteRose" src="whiteRose.webp" alt="whiteRose" width="600" height="800"></div></div>
+</div>
+
+
+  </main>
 
 </body>
 </html> 
