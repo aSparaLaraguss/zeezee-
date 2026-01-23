@@ -4,20 +4,25 @@
 <title>Home</title>
   <link rel="stylesheet" href="css.css">
 </head>
+
+<style>
+.hobbiesImageGrid {
+  display: grid;
+  grid: 12rem 12rem 12rem 12rem / 10rem 10rem 10rem 10rem;
+  justify-content: end;
+  align-content: center;
+  min-height: 60rem;
+}
+
+</style>
 <body>
   <main>
     <h1 class="headliner">Zeezee</h1>
     <topnav>
       <div class="topnav">
         <a class="active" href="home.html">Home</a>
-        <a href="survey.html">Survey</a>
         <a href="flowers.html">Flowers</a>
-        <a href="dreams.html">Dreams</a>
         <a href="hobbies.html">Hobbies</a>
-        <a href="food.html">Food</a>
-        <a href="intrests.html">Intrests</a>
-        <a href="school.html">School</a>
-        <a href="wishes.html">Wishes</a>
         <a href="christmas.html">Christmas</a>
         <a href="films.html">Films</a>
         <a href="pictures.html">Pictures</a>
@@ -35,9 +40,13 @@
 
         art
         singing
-        playing the guitar
-        going for walks (last)
-        3
+        <div class="hobbiesImageGrid">
+          <div><img class="hamilton" src="hamilton.webp" alt="hamiltonPlayImage" width="300" height="400"></div>
+          <div><img class="guitar" src="guitar.jpg" alt="guitarImage" width="300" height="400"></div>
+          <div><img class="hiking" src="hiking.jpg" alt="hikingImage" width="300" height="400"></div>
+          <div><img class="fellRunning" src="fellRunner.jpg" alt="fellRunningImage" width="300" height="400"></div>
+          <div><img class="" src="singing.webp" alt="singingImage" width="300" height="400"></div>
+        </div>
         
         
         
