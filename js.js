@@ -1275,3 +1275,12 @@ SpinButton.prototype.handleDecreaseClick = function (event) {
   event.preventDefault();
   event.stopPropagation();
 };
+
+
+onload = () => {
+  const c = setTimeout(() => {
+    document.body.classList.remove("not-loaded");
+    clearTimeout(c);
+  }, 1000);
+};
+
