@@ -24,12 +24,12 @@ for c in competitors:
     d = c.distance
     e = c.eventName
     if d > 70 and e == "Javelin":
-        f.write(c.name + " - " + c.club + "\n")
+        f.write(c.name + c.club + "\n")
 f.close()
 
 OPEN FILE
 LOOP FOR EACH COMPETITOR IN COMPETITORS DO
-    IF c.distance > 70 AND c.eventName EQUALS "Javelin" THEN
+    IF c.distance > 70 AND c.eventName == "Javelin" THEN
         WRITE c.name + c.club TO FILE
     END IF
 END LOOP
