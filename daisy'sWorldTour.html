@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daisy's World Tour</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-auto-rows: auto;
+            gap: 1rem;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,6 +38,21 @@
                 <li>Tips for fellow travelers</li>
             </ul>
         </section>
+        <section>
+            <h2>Photo Gallery</h2>
+            <div class="image-grid">
+                <img src="https://via.placeholder.com/400x300?text=Paris" alt="Paris">
+                <img src="https://via.placeholder.com/400x300?text=Tokyo" alt="Tokyo">
+                <img src="https://via.placeholder.com/400x300?text=New+York" alt="New York">
+                <img src="https://via.placeholder.com/400x300?text=Sydney" alt="Sydney">
+                <img src="https://via.placeholder.com/400x300?text=Cape+Town" alt="Cape Town">
+                <img src="https://via.placeholder.com/400x300?text=Rio" alt="Rio">
+                <img src="https://via.placeholder.com/400x300?text=Rome" alt="Rome">
+                <img src="https://via.placeholder.com/400x300?text=Bali" alt="Bali">
+                <img src="https://via.placeholder.com/400x300?text=Reykjavik" alt="Reykjavik">
+            </div>
+        </section>
+        
     </main>
     <footer>
         <p>&copy; 2026 Daisy's World Tour</p>
