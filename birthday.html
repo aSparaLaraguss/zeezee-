@@ -272,16 +272,16 @@
   // 20:32 on 30/10/2026 UK time. UK clocks have gone back by then, so UK time = UTC (the "Z").
   // If she's in another time zone, use her local time instead by swapping to:
   //   new Date(2026, 9, 30, 20, 32).getTime()      (months start at 0, so 9 = October)
-  const OPEN_TIME = new Date("2026-10-30T20:32:00Z").getTime();
+  //const OPEN_TIME = new Date("2026-10-30T20:32:00Z").getTime();
 
-  const countdownEl = document.getElementById("countdown");
-
+  //const countdownEl = document.getElementById("countdown");
+///
   function checkTime() {
     const diff = OPEN_TIME - Date.now();
     if (diff <= 0) {
       document.body.classList.remove("waiting");
       clearInterval(timer);
-      return;
+      //return;
     }
     const s = Math.floor(diff / 1000);
     const d = Math.floor(s / 86400);
@@ -292,7 +292,7 @@
   }
   const timer = setInterval(checkTime, 1000);
   checkTime();
-
+///
   // ===== CHANGE THE PASSWORD HERE (not case-sensitive) =====
   const PASSWORD = "zeezee17";
 
