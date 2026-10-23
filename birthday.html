@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
   /* ===== EDIT COLOURS HERE to match the rest of the site ===== */
   :root {
-    --bg: #fff5f8;
-    --card: #ffffff;
-    --text: #4a2c3a;
-    --accent: #e0749a;
-    --accent-soft: #f9d6e3;
-    --nav-bg: #f9d6e3;
+    --bg: #140a2e;          /* deep royal purple */
+    --card: #231247;        /* velvet purple */
+    --text: #f3e9d2;        /* warm ivory */
+    --accent: #d4af37;      /* royal gold */
+    --accent-soft: #4b2f8a; /* royal purple */
+    --nav-bg: #0d0620;      /* near-black navy */
   }
   * { box-sizing: border-box; }
   body {
@@ -62,13 +65,28 @@
     padding: 1.2rem 1.4rem;
     margin: 1rem auto;
     max-width: 650px;
-    box-shadow: 0 3px 10px rgba(224, 116, 154, 0.12);
+    box-shadow: 0 3px 14px rgba(212, 175, 55, 0.18);
   }
   .message h3 { margin: 0 0 0.5rem; color: var(--accent); font-size: 1.2rem; }
   .message p { margin: 0; min-height: 3.2rem; }
 
+  nav { border-bottom: 2px solid var(--accent); }
+
+  /* Crown + royal banner */
+  .crown { width: 90px; height: 63px; display: block; margin: 1.5rem auto 0; }
+  .crown path, .crown rect, .crown circle { fill: var(--accent); stroke: #8a6d12; stroke-width: 2; }
+  .banner {
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    margin: 1.5rem auto; max-width: 820px; padding: 0.9rem 1.2rem;
+    background: linear-gradient(90deg, #2d1566, var(--accent-soft), #2d1566);
+    border-top: 3px solid var(--accent); border-bottom: 3px solid var(--accent);
+    clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
+    color: var(--accent); font-size: 1.5rem; letter-spacing: 0.08em;
+  }
+  .banner .crown { width: 38px; height: 27px; margin: 0; flex-shrink: 0; }
+
   button {
-    background: var(--accent); color: #fff; border: none;
+    background: var(--accent); color: #1a0b3b; border: none;
     padding: 0.6rem 1.6rem; border-radius: 999px;
     font-size: 1rem; font-family: inherit; cursor: pointer; margin-top: 1rem;
   }
@@ -77,7 +95,13 @@
   footer { padding: 2rem 1rem; color: var(--accent); font-size: 1.2rem; }
 
   /* Password screen */
-  body.locked > :not(#lock) { display: none; }
+  body.locked > :not(#lock):not(#wait) { display: none; }
+  body.waiting > :not(#wait) { display: none; }
+  #wait { display: none; min-height: 100vh; padding: 1rem;
+          flex-direction: column; align-items: center; justify-content: center; }
+  body.waiting #wait { display: flex; }
+  #wait #countdown { font-family: "Caveat", "Segoe Script", cursive;
+                     font-size: 2.4rem; color: var(--accent); margin-top: 1rem; }
   #lock { display: none; min-height: 100vh; padding: 1rem;
           flex-direction: column; align-items: center; justify-content: center; }
   body.locked #lock { display: flex; }
@@ -89,18 +113,74 @@
   }
   #lock input:focus { border-color: var(--accent); }
   #lock .error { color: var(--accent); min-height: 1.5rem; margin-top: 0.8rem; }
+  #lock .hint-btn { background: transparent; color: var(--accent);
+                    border: 2px solid var(--accent); margin-top: 0.4rem; }
+  #lock .hint { margin-top: 1rem; max-width: 450px; font-style: italic;
+                background: var(--card); border: 2px solid var(--accent-soft);
+                border-radius: 14px; padding: 0.8rem 1.2rem; }
+
+  /* ===== Handmade / scrapbook feel ===== */
+  h2, h3, h4, .banner span, footer, #lock input, #lock .error, #lock .hint {
+    font-family: "Caveat", "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
+  }
+  h1 { font-family: "Caveat", "Segoe Script", "Bradley Hand", cursive; font-size: 4rem; }
+  h2 { font-size: 2.4rem; }
+  h4 { font-size: 1.7rem; }
+  .message h3 { font-size: 1.8rem; }
+  .message p { font-family: "Caveat", "Segoe Script", "Bradley Hand", cursive;
+               font-size: 1.6rem; line-height: 1.35; }
+  .banner span { font-size: 2rem; letter-spacing: 0.02em; }
+  footer { font-size: 1.8rem; }
+  nav a { font-family: "Caveat", "Segoe Script", cursive; font-size: 1.3rem; }
+
+  /* photos look like slightly crooked prints stuck on with tape */
+  .photo { position: relative; border-radius: 6px; transform: rotate(-2deg);
+           box-shadow: 0 6px 16px rgba(0,0,0,0.45); transition: transform 0.25s ease; }
+  .photo:nth-child(even) { transform: rotate(1.8deg); }
+  .photo:nth-child(3n) { transform: rotate(-0.8deg); }
+  .photo:hover { transform: rotate(0deg) scale(1.03); }
+  .photo::before { content: ""; position: absolute; top: -12px; left: 50%;
+                   width: 70px; height: 24px; margin-left: -35px;
+                   background: rgba(243, 233, 210, 0.55); transform: rotate(-3deg); z-index: 1; }
+
+  /* notes look like little handwritten cards, not perfect boxes */
+  .message { transform: rotate(-0.6deg); border-radius: 8px; }
+  .message:nth-of-type(even) { transform: rotate(0.7deg); }
 </style>
 </head>
-<body class="locked">
+<body class="waiting locked">
+
+<div id="wait">
+  <svg class="crown" viewBox="0 0 100 70" aria-hidden="true">
+    <path d="M10 60 L5 20 L30 40 L50 8 L70 40 L95 20 L90 60 Z"/>
+    <rect x="10" y="60" width="80" height="8" rx="2"/>
+    <circle cx="5" cy="18" r="5"/><circle cx="50" cy="6" r="5"/><circle cx="95" cy="18" r="5"/>
+  </svg>
+  <h1>Zeezee</h1>
+  <h4>Not yet, my love… something special is waiting for you.</h4>
+  <div id="countdown"></div>
+</div>
 
 <div id="lock">
+  <svg class="crown" viewBox="0 0 100 70" aria-hidden="true">
+    <path d="M10 60 L5 20 L30 40 L50 8 L70 40 L95 20 L90 60 Z"/>
+    <rect x="10" y="60" width="80" height="8" rx="2"/>
+    <circle cx="5" cy="18" r="5"/><circle cx="50" cy="6" r="5"/><circle cx="95" cy="18" r="5"/>
+  </svg>
   <h1>Zeezee</h1>
   <h4>Enter the password to open your present.</h4>
   <input type="password" id="pw" placeholder="Password" autocomplete="off">
   <button type="button" id="unlock">Submit</button>
   <div class="error" id="err"></div>
+  <button type="button" id="hintBtn" class="hint-btn" hidden>Need a hint?</button>
+  <div class="hint" id="hint" hidden></div>
 </div>
 
+<svg class="crown" viewBox="0 0 100 70" aria-hidden="true">
+  <path d="M10 60 L5 20 L30 40 L50 8 L70 40 L95 20 L90 60 Z"/>
+  <rect x="10" y="60" width="80" height="8" rx="2"/>
+  <circle cx="5" cy="18" r="5"/><circle cx="50" cy="6" r="5"/><circle cx="95" cy="18" r="5"/>
+</svg>
 <h1>Zeezee</h1>
 
 <nav>
@@ -119,6 +199,20 @@
 
 <main>
 
+  <div class="banner">
+    <svg class="crown" viewBox="0 0 100 70" aria-hidden="true">
+      <path d="M10 60 L5 20 L30 40 L50 8 L70 40 L95 20 L90 60 Z"/>
+      <rect x="10" y="60" width="80" height="8" rx="2"/>
+      <circle cx="5" cy="18" r="5"/><circle cx="50" cy="6" r="5"/><circle cx="95" cy="18" r="5"/>
+    </svg>
+    <span>Long live the birthday queen</span>
+    <svg class="crown" viewBox="0 0 100 70" aria-hidden="true">
+      <path d="M10 60 L5 20 L30 40 L50 8 L70 40 L95 20 L90 60 Z"/>
+      <rect x="10" y="60" width="80" height="8" rx="2"/>
+      <circle cx="5" cy="18" r="5"/><circle cx="50" cy="6" r="5"/><circle cx="95" cy="18" r="5"/>
+    </svg>
+  </div>
+
   <h2>Happy 17th Birthday, Zeezee!</h2>
   <h4>Today is all about you, my darling.</h4>
   <h4>Look how far you've come.</h4>
@@ -131,8 +225,8 @@
   </div>
 
   <div class="message">
-    <h3>A message for you</h3>
-    <p contenteditable="true">Write your first special message here…</p>
+    <h3>A little note for you</h3>
+    <p contenteditable="true">Zeezee, I wanted you to have a little corner of the internet that’s just yours. Write what you really want to say to her here…</p>
   </div>
 
   <h2>Our memories</h2>
@@ -145,12 +239,12 @@
 
   <div class="message">
     <h3>Why I love you</h3>
-    <p contenteditable="true">Write your second special message here…</p>
+    <p contenteditable="true">Tell her the little things, the ones you notice when she isn’t looking…</p>
   </div>
 
   <div class="message">
     <h3>My wish for you this year</h3>
-    <p contenteditable="true">Write your third special message here…</p>
+    <p contenteditable="true">What do you hope this next year feels like for her?</p>
   </div>
 
   <h2>Just you</h2>
@@ -161,8 +255,8 @@
   </div>
 
   <div class="message">
-    <h3>One last thing…</h3>
-    <p contenteditable="true">Write your final message here…</p>
+    <h3>One last thing, love</h3>
+    <p contenteditable="true">The last thing you want her to remember today…</p>
   </div>
 
   <button type="button" onclick="document.getElementById('surprise').hidden = false; this.hidden = true;">Submit</button>
@@ -174,11 +268,47 @@
 <footer>I love you x</footer>
 
 <script>
+  // ===== UNLOCK TIME =====
+  // 20:32 on 30/10/2026 UK time. UK clocks have gone back by then, so UK time = UTC (the "Z").
+  // If she's in another time zone, use her local time instead by swapping to:
+  //   new Date(2026, 9, 30, 20, 32).getTime()      (months start at 0, so 9 = October)
+  const OPEN_TIME = new Date("2026-10-30T20:32:00Z").getTime();
+
+  const countdownEl = document.getElementById("countdown");
+
+  function checkTime() {
+    const diff = OPEN_TIME - Date.now();
+    if (diff <= 0) {
+      document.body.classList.remove("waiting");
+      clearInterval(timer);
+      return;
+    }
+    const s = Math.floor(diff / 1000);
+    const d = Math.floor(s / 86400);
+    const h = Math.floor((s % 86400) / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    countdownEl.textContent = d + "d " + h + "h " + m + "m " + sec + "s";
+  }
+  const timer = setInterval(checkTime, 1000);
+  checkTime();
+
   // ===== CHANGE THE PASSWORD HERE (not case-sensitive) =====
   const PASSWORD = "zeezee17";
 
+  // ===== CHANGE THE HINT HERE =====
+  const HINT = "Think of something only the two of us know…";
+
   const pw = document.getElementById("pw");
   const err = document.getElementById("err");
+  const hintBtn = document.getElementById("hintBtn");
+  const hintBox = document.getElementById("hint");
+
+  hintBtn.addEventListener("click", function () {
+    hintBox.textContent = HINT;
+    hintBox.hidden = false;
+    hintBtn.hidden = true;
+  });
 
   function tryUnlock() {
     if (pw.value.trim().toLowerCase() === PASSWORD.toLowerCase()) {
@@ -186,6 +316,7 @@
       window.scrollTo(0, 0);
     } else {
       err.textContent = "That’s not it, try again x";
+      if (hintBox.hidden) hintBtn.hidden = false;
       pw.value = "";
       pw.focus();
     }
