@@ -268,14 +268,14 @@
 <footer>I love you x</footer>
 
 <script>
-  // ===== UNLOCK TIME =====
+   //===== UNLOCK TIME =====
   // 20:32 on 30/10/2026 UK time. UK clocks have gone back by then, so UK time = UTC (the "Z").
-  // If she's in another time zone, use her local time instead by swapping to:
-  //   new Date(2026, 9, 30, 20, 32).getTime()      (months start at 0, so 9 = October)
-  //const OPEN_TIME = new Date("2026-10-30T20:32:00Z").getTime();
+   //If she's in another time zone, use her local time instead by swapping to:
+     new Date(2026, 9, 30, 20, 32).getTime()      //(months start at 0, so 9 = October)
+  const OPEN_TIME = new Date("2026-10-30T20:32:00Z").getTime();
 
-  //const countdownEl = document.getElementById("countdown");
-///
+  const countdownEl = document.getElementById("countdown");
+
   function checkTime() {
     const diff = OPEN_TIME - Date.now();
     if (diff <= 0) {
